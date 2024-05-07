@@ -45,13 +45,14 @@ PROXY_URL = 'https://free-proxy-list.net/'
 def get_proxies():
     response = requests.get(PROXY_URL)
     soup = BeautifulSoup(response.text, 'lxml')
-    table = soup.find('table')
+    table = soup.find('textarea')
     list_tr = table.find_all('tr')
     list_td = [elem.find_all('td') for elem in list_tr]
     list_td = list(filter(None, list_td))
     list_ip = [elem[0].text for elem in list_td]
     list_ports = [elem[1].text for elem in list_td]
     list_proxies = [':'.join(elem) for elem in list(zip(list_ip, list_ports))]
+    items=table.text.split('\n')
     return list_proxies               
                   
 def get_query_url(query, lang, pos, from_user = False):
