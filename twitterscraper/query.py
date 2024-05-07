@@ -52,7 +52,7 @@ def get_proxies():
     list_ip = [elem[0].text for elem in list_td]
     list_ports = [elem[1].text for elem in list_td]
     list_proxies = [':'.join(elem) for elem in list(zip(list_ip, list_ports))]
-    items=table.text.split('\n')
+    items=table.text.splitlines()
     return list_proxies               
                   
 def get_query_url(query, lang, pos, from_user = False):
